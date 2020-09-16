@@ -2,18 +2,24 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace codelase.data.Entities
+namespace codelase.web.Models.ApplicationModels
 {
-    public class BaseEntity
+    public class CommentModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
         public DateTime DeletedAt { get; set; }
         public bool IsDeleted { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Comment { get; set; }
+
+        [Required]
+        [ForeignKey("BlogModel")]
+        public int BlogId { get; set; }
     }
 }

@@ -6,6 +6,8 @@ using AutoMapper;
 using codelase.data.DatabaseContexts.ApplicationDbContext;
 using codelase.data.DatabaseContexts.AuthenticationDbContext;
 using codelase.data.Entities;
+using codelase.web.Interface;
+using codelase.web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -58,6 +60,8 @@ namespace codelase.web
             .AddDefaultTokenProviders();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddTransient<IBlogService, BlogService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
