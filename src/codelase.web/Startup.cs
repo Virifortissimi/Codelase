@@ -2,9 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using codelase.data.DatabaseContexts.ApplicationDbContext;
+using codelase.data.DatabaseContexts.AuthenticationDbContext;
+using codelase.data.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +30,34 @@ namespace codelase.web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContextPool<AuthenticationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuthConnection"),
+                ConnectionOptions =>
+                {
+                    ConnectionOptions.MigrationsAssembly("codelase.data");
+                }));
+
+            services.AddDbContextPool<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AppConnection"), ConnectionOptions =>
+            {
+                ConnectionOptions.MigrationsAssembly("codelase.data");
+            }));
+
+            //-- Configured Identity --//
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 4;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+                options.User.RequireUniqueEmail = true;
+            })
+            .AddEntityFrameworkStores<AuthenticationDbContext>()
+            .AddDefaultTokenProviders();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
