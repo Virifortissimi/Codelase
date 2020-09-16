@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace codelase.data.Migrations
+namespace CodeLase.data.Migrations
 {
     public partial class InitialMigration : Migration
     {

@@ -1,0 +1,50 @@
+@using CodeLase.web.Models.DTOs
+@model IEnumerable<ReadBlogDTO>
+
+@{
+    ViewData["Title"] = "Blog";
+}
+
+
+<h1>@ViewData["Title"]</h1>
+
+
+<a asp-controller="Blog" asp-action="Edit">Edit</a>
+@* <a href="">Add Blog</a> *@
+<p>See All Blog Post</p>
+
+@if (Model != null )
+{
+    <div class="container">
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Id</td>
+                            <td>CreatedAt</td>
+                            <td>Isdeleted</td>
+                            <td>Title</td>
+                            <td>Category</td>
+                            <td>Body</td>
+                        </tr>
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.CreatedAt</td>
+                            <td>@item.IsDeleted</td>
+                            <td>@item.Title</td>
+                            <td>@item.Category</td>
+                            <td>@item.Body</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>   
+        }
+    </div>
+}
+else
+{
+    <h3 class="text-danger">No blog Post available</h3>
+}
+

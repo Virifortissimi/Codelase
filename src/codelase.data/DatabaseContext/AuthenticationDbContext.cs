@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace codelase.data.DatabaseContexts.AuthenticationDbContext
+namespace CodeLase.data.DatabaseContext
 {
     public class AuthenticationDbContext : DbContext
     {

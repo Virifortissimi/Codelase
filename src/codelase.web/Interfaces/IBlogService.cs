@@ -1,17 +1,16 @@
 using System;
 using System.Collections.Generic;
-using codelase.data.Entities;
-using codelase.web.Models.ApplicationModels;
+using CodeLase.data.Entities;
 
-namespace codelase.web.Interface
+namespace CodeLase.web.Interfaces
 {
     public interface IBlogService
     {
         void AddPost(BlogModel model);
 
-        IEnumerable<BlogPost> GetAllPosts();
+        List<BlogModel> GetAllPosts();
 
-        BlogPost GetPost(Guid Id);
+        BlogModel GetPost(Guid Id);
 
         bool RemovePost(Guid Id);
 

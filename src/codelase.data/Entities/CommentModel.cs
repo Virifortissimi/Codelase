@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace codelase.data.Entities
+namespace CodeLase.data.Entities
 {
-    public class BlogComment : BaseEntity
+    public class CommentModel : BaseEntity
     {
         public string Name { get; set; }
         public string Email { get; set; }

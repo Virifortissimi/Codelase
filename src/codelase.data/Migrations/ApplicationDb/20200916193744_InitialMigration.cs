@@ -1,17 +1,34 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace codelase.data.Migrations.ApplicationDb
+namespace CodeLase.data.Migrations.ApplicationDb
 {
     public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "BlogComments",
+                name: "Blogs",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    DeletedAt = table.Column<DateTime>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Category = table.Column<string>(nullable: true),
+                    Body = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Blogs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     DeletedAt = table.Column<DateTime>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
@@ -22,34 +39,17 @@ namespace codelase.data.Migrations.ApplicationDb
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BlogComments", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BlogPosts",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    DeletedAt = table.Column<DateTime>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    Category = table.Column<string>(nullable: true),
-                    Body = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BlogPosts", x => x.Id);
+                    table.PrimaryKey("PK_Comments", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BlogComments");
+                name: "Blogs");
 
             migrationBuilder.DropTable(
-                name: "BlogPosts");
+                name: "Comments");
         }
     }
 }

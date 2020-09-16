@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using codelase.data.DatabaseContexts.ApplicationDbContext;
-using codelase.data.DatabaseContexts.AuthenticationDbContext;
-using codelase.data.Entities;
-using codelase.web.Interface;
-using codelase.web.Services;
+using CodeLase.data.DatabaseContext;
+using CodeLase.data.Entities;
+using CodeLase.web.Interfaces;
+using CodeLase.web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -17,7 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace codelase.web
+namespace CodeLase.web
 {
     public class Startup
     {
@@ -36,12 +35,12 @@ namespace codelase.web
             services.AddDbContextPool<AuthenticationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuthConnection"),
                 ConnectionOptions =>
                 {
-                    ConnectionOptions.MigrationsAssembly("codelase.data");
+                    ConnectionOptions.MigrationsAssembly("CodeLase.data");
                 }));
 
             services.AddDbContextPool<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AppConnection"), ConnectionOptions =>
             {
-                ConnectionOptions.MigrationsAssembly("codelase.data");
+                ConnectionOptions.MigrationsAssembly("CodeLase.data");
             }));
 
             //-- Configured Identity --//

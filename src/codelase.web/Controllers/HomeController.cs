@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using codelase.web.Models;
+using CodeLase.web.Models;
 
-namespace codelase.web.Controllers
+namespace CodeLase.web.Controllers
 {
     public class HomeController : Controller
     {

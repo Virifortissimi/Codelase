@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using codelase.data.DatabaseContexts.ApplicationDbContext;
-using codelase.data.Entities;
-using codelase.web.Interface;
-using codelase.web.Models.ApplicationModels;
+using CodeLase.data.DatabaseContext;
+using CodeLase.data.Entities;
+using CodeLase.web.Interfaces;
 
-namespace codelase.web.Services
+namespace CodeLase.web.Services
 {
     public class BlogService : IBlogService
     {
@@ -22,7 +21,7 @@ namespace codelase.web.Services
         {
             if (model != null)
             {
-                var blogPost = new BlogPost
+                var blogPost = new BlogModel
                 {
                     Id = Guid.NewGuid(),
                     CreatedAt = DateTime.Now,
@@ -31,35 +30,32 @@ namespace codelase.web.Services
                     Category = model.Category,
                     Body = model.Body
                 };
-                _context.BlogPosts.Add(blogPost);
-                // return food.Id;
+                _context.Blogs.Add(blogPost);
             }
         }
 
-        public IEnumerable<BlogPost> GetAllPosts()
+        public List<BlogModel> GetAllPosts()
         {
-            IEnumerable<BlogPost> model = _context.BlogPosts.ToList();
-
-            return model;
+            return _context.Blogs.ToList();
         }
 
-        public BlogPost GetPost(Guid Id)
+        public BlogModel GetPost(Guid Id)
         {
-            BlogPost model = _context.BlogPosts.FirstOrDefault(p => p.Id == Id);
+            BlogModel model = _context.Blogs.FirstOrDefault(p => p.Id == Id);
 
             return model;
         }
 
         public bool RemovePost(Guid Id)
         {
-            BlogPost model = _context.BlogPosts.FirstOrDefault(p => p.Id == Id);
+            BlogModel model = _context.Blogs.FirstOrDefault(p => p.Id == Id);
 
-            var blogPost = new BlogPost
+            var blog = new BlogModel
             {
                 DeletedAt = DateTime.Now,
                 IsDeleted = true
             };
-            _context.BlogPosts.Add(blogPost);
+            _context.Blogs.Add(blog);
 
             return true;
         }

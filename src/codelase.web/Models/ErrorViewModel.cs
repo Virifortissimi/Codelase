@@ -1,6 +1,6 @@
 using System;
 
-namespace codelase.web.Models
+namespace CodeLase.web.Models
 {
     public class ErrorViewModel
     {

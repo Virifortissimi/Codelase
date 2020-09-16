@@ -1,6 +1,6 @@
-namespace codelase.data.Entities
+namespace CodeLase.data.Entities
 {
-    public class BlogPost : BaseEntity
+    public class BlogModel : BaseEntity
     {
         public string Title { get; set; }
         public string Category { get; set; }

@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\codelase.data\codelase.data.csproj" />
+    <ProjectReference Include="..\CodeLase.data\CodeLase.data.csproj" />
   </ItemGroup>
 
 </Project>
